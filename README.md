@@ -1,4 +1,4 @@
-# InhibitSleep
+# Amphetamine
 
 This plugin polls DMS mpris players and disables sleep if one is found.
 
