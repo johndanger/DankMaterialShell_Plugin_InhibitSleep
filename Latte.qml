@@ -23,53 +23,62 @@ PluginComponent {
         PopoutComponent {
             id: popout
             
-            headerText: "Amphetamine"
+            headerText: "Latte"
             detailsText: "Select auto for when a media player is detected, select manual to toggle sleep inhibition manually"
+            showCloseButton: true
             
             Column {
                 width: parent.width
                 spacing: Theme.spacingS
                 
-                Rectangle {
+                StyledRect {
                     width: parent.width
-                    height: 40
-                    color: root.mode === "auto" ? Theme.primary : "transparent"
-                    radius: 4
-                    border.color: "#40000000"
-                    border.width: 3
+                    height: 44
+                    color: autoMouseArea.containsMouse ? Theme.surfaceContainerHighest : (root.mode === "auto" ? Theme.primary : Theme.surfaceContainerHigh)
+                    radius: Theme.cornerRadius
+                    border.width: 0
                     
                     StyledText {
-                        anchors.centerIn: parent
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingM
+                        anchors.verticalCenter: parent.verticalCenter
                         text: "Auto (Media Detection)"
-                        color: root.mode === "auto" ? "#000000" : "#FFFFFF"
+                        color: root.mode === "auto" ? Theme.onPrimary : Theme.surfaceText
                         font.pixelSize: Theme.fontSizeMedium
                     }
                     
                     MouseArea {
+                        id: autoMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.mode = "auto"
                         }
                     }
                 }
                 
-                Rectangle {
+                StyledRect {
                     width: parent.width
-                    height: 40
-                    color: root.mode === "manual" ? Theme.primary : "transparent"
-                    radius: 4
-                    border.color: "#40000000"
-                    border.width: 3
+                    height: 44
+                    color: manualMouseArea.containsMouse ? Theme.surfaceContainerHighest : (root.mode === "manual" ? Theme.primary : Theme.surfaceContainerHigh)
+                    radius: Theme.cornerRadius
+                    border.width: 0
                     
                     StyledText {
-                        anchors.centerIn: parent
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingM
+                        anchors.verticalCenter: parent.verticalCenter
                         text: "Manual (On/Off)"
-                        color: root.mode === "manual" ? "#000000" : "#FFFFFF"
+                        color: root.mode === "manual" ? Theme.onPrimary : Theme.surfaceText
                         font.pixelSize: Theme.fontSizeMedium
                     }
                     
                     MouseArea {
+                        id: manualMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.mode = "manual"
                         }
@@ -77,24 +86,28 @@ PluginComponent {
                 }
                 
                 // Toggle button for manual mode
-                Rectangle {
+                StyledRect {
                     width: parent.width
-                    height: 40
+                    height: 44
                     visible: root.mode === "manual"
-                    color: root.sleepInhibited ? Theme.primary : Theme.surfaceVariant
-                    radius: 4
-                    border.color: "#40000000"
-                    border.width: 3
+                    color: toggleMouseArea.containsMouse ? Theme.surfaceContainerHighest : (root.sleepInhibited ? Theme.primary : Theme.surfaceContainerHigh)
+                    radius: Theme.cornerRadius
+                    border.width: 0
                     
                     StyledText {
-                        anchors.centerIn: parent
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.spacingM
+                        anchors.verticalCenter: parent.verticalCenter
                         text: root.sleepInhibited ? "Disable Sleep Inhibition" : "Enable Sleep Inhibition"
-                        color: root.sleepInhibited ? "#000000" : "#FFFFFF"
+                        color: root.sleepInhibited ? Theme.onPrimary : Theme.surfaceText
                         font.pixelSize: Theme.fontSizeMedium
                     }
                     
                     MouseArea {
+                        id: toggleMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.handleClick()
                         }
@@ -106,55 +119,21 @@ PluginComponent {
 
     // Bar indicator for horizontal bar
     horizontalBarPill: Component {
-        Item {
-            width: 16
-            height: 16
-            
-            DankIcon {
-                anchors.centerIn: parent
-                name: "coffee"
-                size: 16
-                color: root.sleepInhibited ? Theme.primary : "#808080"
-                opacity: root.sleepInhibited ? 1.0 : 0.3
-            }
-            
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton
-                onClicked: (mouse) => {
-                    if (mouse.button === Qt.RightButton && root.mode === "manual") {
-                        // Right click: toggle sleep inhibition (only in manual mode)
-                        root.handleClick()
-                    }
-                }
-            }
+        DankIcon {
+            name: "coffee"
+            color: root.sleepInhibited ? Theme.primary : Theme.surfaceText
+            size: 20
+            opacity: root.sleepInhibited ? 1.0 : 0.3
         }
     }
 
     // Bar indicator for vertical bar
     verticalBarPill: Component {
-        Item {
-            width: 16
-            height: 16
-            
-            DankIcon {
-                anchors.centerIn: parent
-                name: "coffee"
-                size: 16
-                color: root.sleepInhibited ? Theme.primary : "#808080"
-                opacity: root.sleepInhibited ? 1.0 : 0.3
-            }
-            
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton
-                onClicked: (mouse) => {
-                    if (mouse.button === Qt.RightButton && root.mode === "manual") {
-                        // Right click: toggle sleep inhibition (only in manual mode)
-                        root.handleClick()
-                    }
-                }
-            }
+        DankIcon {
+            name: "coffee"
+            color: root.sleepInhibited ? Theme.primary : Theme.surfaceText
+            size: 20
+            opacity: root.sleepInhibited ? 1.0 : 0.3
         }
     }
 

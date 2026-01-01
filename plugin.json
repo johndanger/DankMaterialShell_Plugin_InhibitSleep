@@ -1,11 +1,11 @@
 {
-  "id": "dev.johndanger.amphetamine",
-  "name": "Amphetamine",
-  "description": "Amphetamine is a plugin for automatic or manual sleep inhibition",
+  "id": "dev.johndanger.latte",
+  "name": "Latte",
+  "description": "Latte is a plugin for automatic or manual sleep inhibition",
   "version": "1.0.0",
   "author": "johndanger",
   "type": "widget",
   "icon": "coffee",
-  "component": "./Amphetamine.qml",
+  "component": "./Latte.qml",
   "permissions": []
 }
