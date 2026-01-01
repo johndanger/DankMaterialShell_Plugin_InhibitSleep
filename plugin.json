@@ -1,5 +1,5 @@
 {
-  "id": "com.johndanger.amphetamine",
+  "id": "dev.johndanger.amphetamine",
   "name": "Amphetamine",
   "description": "Amphetamine is a plugin that can automatically inhibit sleep when a media player is detected, or manually toggle sleep inhibition",
   "version": "1.0.0",
